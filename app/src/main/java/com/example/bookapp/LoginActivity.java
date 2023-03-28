@@ -49,12 +49,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //handle click, go to register screen
-        binding.noAccountTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+
+
+
 
         ////handle click, begin login
         binding.LoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +61,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    private String email =  "", password= "";
+
+    private String email = "", password = "";
+
     private void validateData() {
         //Before login account let do some data validation
 
@@ -77,8 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Invalid email pattern...!", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Enter password...!", Toast.LENGTH_SHORT).show();
-        }
-        else {
+        } else {
             //dữ liệu được xác thực, bắt đầu đăng nhập
             loginUser();
         }
@@ -89,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.show();
 
         //show user
-        firebaseAuth.signInWithEmailAndPassword(email,password)
+        firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
@@ -99,10 +97,10 @@ public class LoginActivity extends AppCompatActivity {
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure( Exception e) {
-                    //login failed
+                    public void onFailure(Exception e) {
+                        //login failed
                         progressDialog.dismiss();
-                        Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -118,24 +116,20 @@ public class LoginActivity extends AppCompatActivity {
         ref.child(firebaseUser.getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onDataChange( DataSnapshot snapshot) {
+                    public void onDataChange(DataSnapshot snapshot) {
                         progressDialog.dismiss();
                         //get kieu nguoi dung
-                        String userType = ""+snapshot.child("userType").getValue();
+                        String userType = "" + snapshot.child("userType").getValue();
                         //kiem tra user type
-                        if(userType.equals("user")){
-                            //neu la user thi open UserDashboard
-                            startActivity(new Intent(LoginActivity.this, DashboardUserActivity.class));
-                            finish();
-                        } else if (userType.equals("admin")) {
-                            //neu la user thi open UserDashboard
-                            startActivity(new Intent(LoginActivity.this,DashboardAdminActivity.class));
-                            finish();
-                        }
+
+                        //neu la user thi open UserDashboard
+                        startActivity(new Intent(LoginActivity.this, DashboardAdminActivity.class));
+
+
                     }
 
                     @Override
-                    public void onCancelled( DatabaseError error) {
+                    public void onCancelled(DatabaseError error) {
 
                     }
                 });
