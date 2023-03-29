@@ -36,12 +36,20 @@ public class DashboardAdminActivity extends AppCompatActivity {
                 chekUser();
             }
         });
+        //xu li click add category
+        binding.addCategoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashboardAdminActivity.this, CategoryAddActivity.class));
+            }
+        });
     }
+ 
+
 
     private void chekUser() {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null) {
-            //ko login quay lai main screen
             startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
