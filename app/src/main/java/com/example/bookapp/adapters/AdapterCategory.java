@@ -1,8 +1,9 @@
-package com.example.bookapp;
+package com.example.bookapp.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.bookapp.PdfListAdminActivity;
+import com.example.bookapp.models.ModelCategory;
 import com.example.bookapp.databinding.RowCategoryBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,6 +80,17 @@ public class AdapterCategory extends RecyclerView.Adapter<AdapterCategory.Holder
                             }
                         })
                         .show();
+            }
+        });
+
+        //handle item click, goto PdfListAdminActivity, also pass pdf category and categoryId
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PdfListAdminActivity.class);
+                intent.putExtra("categoryId", id);
+                intent.putExtra("categoryTitle", category);
+                context.startActivity(intent);
             }
         });
 

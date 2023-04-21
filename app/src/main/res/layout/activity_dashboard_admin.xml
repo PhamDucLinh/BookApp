@@ -54,12 +54,16 @@
         android:id="@+id/categoriesRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/row_category"
+        android:layout_above="@id/bottomLl"
         android:layout_below="@id/toolbarRl"
-        android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_above="@id/bottomLl"/>
-<LinearLayout
+        tools:listitem="@layout/row_category" />
+
+    <LinearLayout
     android:id="@+id/bottomLl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

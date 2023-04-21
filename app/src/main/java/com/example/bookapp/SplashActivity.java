@@ -1,4 +1,4 @@
-package com.example.bookapp;
+ package com.example.bookapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,20 +25,17 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        //trong luc firebase xac thuc
-        firebaseAuth = FirebaseAuth.getInstance();
-
-
         //Start main screen after 2s
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                checkUser();
+               startActivity(new Intent(SplashActivity.this, MainActivity.class) );
             }
         }, 2000); //2000 = 2s
     }
+}
 
-    private void checkUser() {
+  /*  private void checkUser() {
         //lay nguoi dung hien tai
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         if (firebaseUser == null){
@@ -76,3 +73,4 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 }
+*/
